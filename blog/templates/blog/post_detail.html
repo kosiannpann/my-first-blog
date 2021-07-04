@@ -14,4 +14,20 @@
   <h2>{{ post.title }}</h2>
   <p>{{ post.text|linebreaksbr }}</p>
 </div>
+
+<div class="comment">
+  <form action="" method="POST">
+    <p><label for="com">コメント</label></p>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">投稿</button>
+  </form>
+
+  {% for comment in comments %}
+  <p>{{ comment.text }}</br><small>{{ comment.posted_at }}</small></p>
+  {% empty %}
+  <p>コメントはありません</p>
+  {% endfor %}
+</div>
+
 {% endblock %}
